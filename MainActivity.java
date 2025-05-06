@@ -1,110 +1,57 @@
-package com.example.myapplication8;
+package com.example.myapplication7;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TimePicker;
+import android.widget.CheckBox;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication8.R;
-
 public class MainActivity extends AppCompatActivity {
 
-    private TextView display;
-    private String currentInput = "";
-    private String operator = "";
-    private double firstOperand = 0;
-    private boolean isOperatorClicked = false;
+    private EditText feedbackNameEditText;
+    private DatePicker datePicker;
+    private TimePicker timePicker;
+    private RadioGroup ratingGroup;
+    private EditText feedbackCommentsEditText;
+    private CheckBox subscribeCheckBox;
+    private Button submitFeedbackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        display = findViewById(R.id.display);
+        feedbackNameEditText = findViewById(R.id.feedback_name);
+        datePicker = findViewById(R.id.date_picker);
+        timePicker = findViewById(R.id.time_picker);
+        ratingGroup = findViewById(R.id.rating_group);
+        feedbackCommentsEditText = findViewById(R.id.feedback_comments);
+        subscribeCheckBox = findViewById(R.id.subscribe_checkbox);
+        submitFeedbackButton = findViewById(R.id.submit_feedback_button);
 
-        // Set up button click listeners
-        setButtonListeners();
-    }
+        submitFeedbackButton.setOnClickListener(v -> {
+            String name = feedbackNameEditText.getText().toString();
+            int selectedRatingId = ratingGroup.getCheckedRadioButtonId();
+            RadioButton selectedRating = findViewById(selectedRatingId);
+            String rating = selectedRating != null ? selectedRating.getText().toString() : "No rating";
+            String comments = feedbackCommentsEditText.getText().toString();
+            boolean isSubscribed = subscribeCheckBox.isChecked();
 
-    private void setButtonListeners() {
-        int[] numberButtons = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.zero};
-        for (int id : numberButtons) {
-            findViewById(id).setOnClickListener(this::onNumberClick);
-        }
+            int day = datePicker.getDayOfMonth();
+            int month = datePicker.getMonth();
+            int year = datePicker.getYear();
 
-        findViewById(R.id.add).setOnClickListener(this::onOperatorClick);
-        findViewById(R.id.subtract).setOnClickListener(this::onOperatorClick);
-        findViewById(R.id.multiply).setOnClickListener(this::onOperatorClick);
-        findViewById(R.id.divide).setOnClickListener(this::onOperatorClick);
+            int hour = timePicker.getCurrentHour();
+            int minute = timePicker.getCurrentMinute();
 
-        findViewById(R.id.equals).setOnClickListener(this::onEqualsClick);
-        findViewById(R.id.Clear).setOnClickListener(this::onClearClick);
-        findViewById(R.id.dot).setOnClickListener(this::onDotClick);
-    }
-
-    private void onNumberClick(View view) {
-        Button button = (Button) view;
-        if (isOperatorClicked) {
-            currentInput = "";
-            isOperatorClicked = false;
-        }
-        currentInput += button.getText().toString();
-        display.setText(currentInput);
-    }
-
-    private void onOperatorClick(View view) {
-        Button button = (Button) view;
-        if (!currentInput.isEmpty()) {
-            firstOperand = Double.parseDouble(currentInput);
-            operator = button.getText().toString();
-            isOperatorClicked = true;
-        }
-        currentInput += button.getText().toString();
-        display.setText(currentInput);
-    }
-
-    private void onEqualsClick(View view) {
-        if (!currentInput.isEmpty() && !operator.isEmpty()) {
-            double secondOperand = Double.parseDouble(currentInput);
-            double result = 0;
-            switch (operator) {
-                case "+":
-                    result = firstOperand + secondOperand;
-                    break;
-                case "-":
-                    result = firstOperand - secondOperand;
-                    break;
-                case "x":
-                    result = firstOperand * secondOperand;
-                    break;
-                case "/":
-                    if (secondOperand != 0) {
-                        result = firstOperand / secondOperand;
-                    } else {
-                        display.setText("Error");
-                        return;
-                    }
-                    break;
-            }
-            display.setText(String.valueOf(result));
-            currentInput = String.valueOf(result);
-            operator = "";
-        }
-    }
-
-    private void onClearClick(View view) {
-        currentInput = "";
-        operator = "";
-        firstOperand = 0;
-        display.setText("0");
-    }
-
-    private void onDotClick(View view) {
-        if (!currentInput.contains(".")) {
-            currentInput += ".";
-            display.setText(currentInput);
-        }
+            // Handle the form submission (e.g., save data, show confirmation, etc.)
+            // Example: Show collected data in a log or Toast for demonstration
+            // Here, you can use a Toast or send the data to a backend or display it as needed
+        });
     }
 }
