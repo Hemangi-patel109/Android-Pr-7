@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center">
+
+        <!-- Name Input -->
+        <EditText
+            android:id="@+id/feedback_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Your Name"/>
+
+        <!-- DatePicker -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Date"
+            android:paddingTop="10dp"/>
+
+        <DatePicker
+            android:id="@+id/date_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- TimePicker -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Time"
+            android:paddingTop="10dp"/>
+
+        <TimePicker
+            android:id="@+id/time_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- RadioGroup for Feedback Rating -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rating"
+            android:paddingTop="10dp"/>
+
+        <RadioGroup
+            android:id="@+id/rating_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/rating_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Good"/>
+            <RadioButton
+                android:id="@+id/rating_average"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Average"/>
+            <RadioButton
+                android:id="@+id/rating_poor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Poor"/>
+        </RadioGroup>
+
+        <!-- Feedback Comments -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comments"
+            android:paddingTop="10dp"/>
+
+        <EditText
+            android:id="@+id/feedback_comments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Write your comments here"
+            android:inputType="textMultiLine"/>
+
+        <!-- CheckBox for Subscription -->
+        <CheckBox
+            android:id="@+id/subscribe_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subscribe to Newsletter"/>
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/submit_feedback_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit Feedback"/>
+
+    </LinearLayout>
+</android.widget.ScrollView>
